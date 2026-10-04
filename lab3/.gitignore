@@ -1,0 +1,5 @@
+src/*.o
+src/sequential_min_max
+src/parallel_min_max
+src/run_sequential_min_max
+src/min_max_*.txt
