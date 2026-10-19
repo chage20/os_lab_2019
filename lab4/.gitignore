@@ -1,0 +1,11 @@
+# find_min_max/
+src/find_min_max/*.o
+src/find_min_max/parallel_min_max
+src/find_min_max/process_memory
+src/find_min_max/zombie_demo
+src/find_min_max/min_max_*.txt
+
+# parallel_sum/
+src/parallel_sum/*.o
+src/parallel_sum/*.a
+src/parallel_sum/psum
