@@ -57,15 +57,19 @@ void do_one_thing(int *pnum_times) {
   unsigned long k;
   int work;
   for (i = 0; i < 50; i++) {
-    // pthread_mutex_lock(&mut);
+#ifdef USE_MUTEX
+    pthread_mutex_lock(&mut); /* вход в критическую секцию */
+#endif
     printf("doing one thing\n");
     work = *pnum_times;
     printf("counter = %d\n", work);
     work++; /* increment, but not write */
-    for (k = 0; k < 500000; k++)
+    for (k = 0; k < 300000; k++)
       ;                 /* long cycle */
     *pnum_times = work; /* write back */
-	// pthread_mutex_unlock(&mut);
+#ifdef USE_MUTEX
+    pthread_mutex_unlock(&mut); /* выход из критической секции */
+#endif
   }
 }
 
@@ -74,15 +78,19 @@ void do_another_thing(int *pnum_times) {
   unsigned long k;
   int work;
   for (i = 0; i < 50; i++) {
-    // pthread_mutex_lock(&mut);
+#ifdef USE_MUTEX
+    pthread_mutex_lock(&mut); /* вход в критическую секцию */
+#endif
     printf("doing another thing\n");
     work = *pnum_times;
     printf("counter = %d\n", work);
     work++; /* increment, but not write */
-    for (k = 0; k < 500000; k++)
+    for (k = 0; k < 1000000; k++)
       ;                 /* long cycle */
     *pnum_times = work; /* write back */
-    // pthread_mutex_unlock(&mut);
+#ifdef USE_MUTEX
+    pthread_mutex_unlock(&mut); /* выход из критической секции */
+#endif
   }
 }
 
